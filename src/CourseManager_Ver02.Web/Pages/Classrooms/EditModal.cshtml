@@ -1,0 +1,58 @@
+﻿@page
+@using CourseManager_Ver02.Localization
+@using CourseManager_Ver02.Web.Pages.Classrooms
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model EditModalModel
+@inject IStringLocalizer<CourseManager_Ver02Resource> L
+@{
+    Layout = null;
+    string[] daysofweek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+}
+<form asp-page="/Classrooms/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Classroom.Id" type="hidden" />
+            <abp-input asp-for="Classroom.Name" />
+            @*<abp-select asp-for="Classroom.CourseId" class="js-select2" asp-items="@Model.Courses" style="width:100%">
+        </abp-select>*@
+            <label class="control-label"> Select Course </label>
+            <input asp-for="Classroom.CourseId" class="form-control" readonly hidden />
+            <input value="@Model.coursename" class="form-control" readonly />
+            <abp-select asp-for="Classroom.TeacherId" class="js-select2" multiple="multiple" asp-items="@Model.Teachers" style="width:100%">
+            </abp-select>
+            <abp-select asp-for="Classroom.StudentId" class="js-select2" multiple="multiple" asp-items="@Model.Students" style="width:100%">
+            </abp-select>
+            <abp-input asp-for="Classroom.DateStart" />
+            <abp-input asp-for="Classroom.DateEnd" />
+            <label class="control-label"> SessionsEachWeek </label>
+            <select asp-for="Classroom.SessionsEachWeek" class="js-select2" multiple="multiple" style="width:100%">
+                @foreach (var i in daysofweek)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <abp-input asp-for="Classroom.SessionStart" />
+            <abp-input asp-for="Classroom.SessionEnd" />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>
+
+<script>
+    $('#coursenamee').css('pointer-events', 'none');
+
+    $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Placeholder",
+        allowHtml: true,
+        allowClear: true,
+        tags: true,
+        templateSelection: function (data, container) {
+            $(data.element).attr('data-custom-attribute', data.customValue);
+            return data.text;
+        }
+    });
+    $('.js-select2').find(':selected').data('custom-attribute');
+</script>

@@ -1,0 +1,37 @@
+﻿@page
+@using CourseManager_Ver02.Localization
+@using CourseManager_Ver02.Web.Pages.Courses
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model EditModalModel
+@inject IStringLocalizer<CourseManager_Ver02Resource> L
+@{
+    Layout = null;
+}
+<form asp-page="/Courses/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Course.Id" type="hidden" />
+            <abp-input asp-for="Course.Name" />
+            <abp-input asp-for="Course.Price" />
+            <abp-select asp-for="Course.TeacherId" class="js-select2" id="teacheridd" multiple="multiple" asp-items="@Model.Teachers"></abp-select>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>
+
+<script>
+    $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Placeholder",
+        allowHtml: true,
+        allowClear: true,
+        tags: true,
+        templateSelection: function (data, container) {
+            $(data.element).attr('data-custom-attribute', data.customValue);
+            return data.text;
+        }
+    });
+    $('.js-select2').find(':selected').data('custom-attribute');
+</script>

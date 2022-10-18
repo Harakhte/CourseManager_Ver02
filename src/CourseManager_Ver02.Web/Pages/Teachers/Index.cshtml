@@ -1,0 +1,34 @@
+﻿@page
+@using CourseManager_Ver02.Localization
+@using CourseManager_Ver02.Permissions
+@using CourseManager_Ver02.Web.Pages.Teachers
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@model IndexModel
+@inject IStringLocalizer<CourseManager_Ver02Resource> L
+@inject IAuthorizationService AuthorizationService
+@section scripts
+{
+    <abp-script src="/Pages/Teachers/Index.js" />
+}
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Teachers"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-right">
+                @if (await AuthorizationService.IsGrantedAsync(CourseManager_Ver02Permissions.Teachers.Create))
+                {
+                    <abp-button id="NewTeacherButton"
+                                text="@L["NewTeacher"].Value"
+                                icon="plus"
+                                button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="TeacherTable"></abp-table>
+    </abp-card-body>
+</abp-card>

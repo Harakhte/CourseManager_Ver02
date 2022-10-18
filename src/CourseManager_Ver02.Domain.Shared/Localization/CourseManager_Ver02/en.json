@@ -1,0 +1,20 @@
+{
+  "culture": "en",
+  "texts": {
+    "Menu:Home": "Home",
+    "Welcome": "Welcome",
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+    "Permission:Teachers": "Teachers Management",
+    "Permission:Teachers.Create": "Creating new Teachers",
+    "Permission:Teachers.Edit": "Editing the Teachers",
+    "Permission:Teachers.Delete": "Deleting the Teachers",
+    "Permission:Students": "Students Management",
+    "Permission:Students.Create": "Creating new Students",
+    "Permission:Students.Edit": "Editing the Students",
+    "Permission:Students.Delete": "Deleting the Students",
+    "Permission:Courses": "Course Management",
+    "Permission:Courses.Create": "Creating new Course",
+    "Permission:Courses.Edit": "Editing the Course",
+    "Permission:Courses.Delete": "Deleting the Course"
+  }
+}

@@ -1,0 +1,23 @@
+﻿@page
+@using CourseManager_Ver02.Localization
+@using CourseManager_Ver02.Web.Pages.Students
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model CreateModalModel
+@inject IStringLocalizer<CourseManager_Ver02Resource> L
+@{
+    Layout = null;
+}
+<form asp-page="/Students/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewStudent"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Student.Name" />
+            <abp-input asp-for="Student.BirthDate" />
+            <abp-input asp-for="Student.Address" />
+            <abp-input asp-for="Student.Phone" />
+            <abp-input asp-for="Student.Email" />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>
